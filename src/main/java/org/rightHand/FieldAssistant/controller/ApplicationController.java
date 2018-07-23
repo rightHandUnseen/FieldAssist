@@ -9,14 +9,19 @@ public class ApplicationController {
 
 	@ResponseBody
 	@RequestMapping("/home")
-	public String hello() {
-		return "Spring hello";
+	public String home() {
+		return "mhome.html";
 	}
 	
 	
-	@RequestMapping("/")
-	public String welcome() {
-		return "welcomepage";
+	@RequestMapping("/core/index")
+	public String index() {
+		return "/core/index.html";
+	}
+	
+	@RequestMapping("/login")
+	public String login() {
+		return "/login.html";
 	}
 	
 	

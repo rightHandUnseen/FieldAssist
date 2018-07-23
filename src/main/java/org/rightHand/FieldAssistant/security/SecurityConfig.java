@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -28,11 +27,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/core*").hasRole("USER").antMatchers("/admin*").hasRole("ADMIN")
-				.antMatchers("/welcome*").permitAll().and().httpBasic().and().authorizeRequests().antMatchers("/login")
-				.anonymous().and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/welcome").clearAuthentication(true).deleteCookies("JSESSIONID")
-				.invalidateHttpSession(true);
+		http.authorizeRequests().antMatchers("/core/*").hasRole("USER").antMatchers("/admin/*").hasRole("ADMIN")
+				.antMatchers("/welcome*").permitAll().and().httpBasic()
+				.and().authorizeRequests().antMatchers("/login").permitAll()
+				.and().formLogin().loginPage("/login").loginProcessingUrl("/login").usernameParameter("username")
+				.passwordParameter("password").defaultSuccessUrl("/core/index")
+				.and().logout().clearAuthentication(true).logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("JSESSIONID")
+	            .invalidateHttpSession(true);;
 	}
 
 }
