@@ -1,5 +1,6 @@
 package org.rightHand.FieldAssistant.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,10 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.UniqueConstraint;
 
 @Entity(name = "user")
-public class User {
+public class User implements Serializable{
+	
+	private static final long serialVersionUID = 1018399282930847120L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -25,6 +29,8 @@ public class User {
 	@Column(unique = true)
 	private String email;
 	private boolean enabled;
+	@OneToOne
+	private Publisher publisher;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Role.class)
 	@JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = {
@@ -80,5 +86,14 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	public Publisher getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(Publisher publisher) {
+		this.publisher = publisher;
+	}
+	
 
 }
