@@ -1,14 +1,18 @@
 package org.rightHand.FieldAssistant.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 
 import org.rightHand.FieldAssistant.model.enums.Gender;
@@ -30,6 +34,12 @@ public class Publisher implements Serializable{
 	private Gender gender;
 	@ManyToOne
 	private Congregation congregation;
+	@ManyToMany
+	@JoinTable(name = "PUBLISHER_LANGUAGE", joinColumns = { @JoinColumn(name = "LANGUAGE_ISOCODE") }, inverseJoinColumns = {
+			@JoinColumn(name = "PUBLISER_USER_ID") }, uniqueConstraints = @UniqueConstraint(columnNames = { "PUBLISER_USER_ID",
+					"LANGUAGE_ISOCODE" }, name =  "UK_PUBLISHER_LANGUAGE"))
+	private List<Language> languages;
+	
 	public User getUser() {
 		return user;
 	}

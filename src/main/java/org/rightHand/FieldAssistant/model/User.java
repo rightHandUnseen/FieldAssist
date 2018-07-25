@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.UniqueConstraint;
 
 @Entity(name = "user")
@@ -29,8 +28,7 @@ public class User implements Serializable{
 	@Column(unique = true)
 	private String email;
 	private boolean enabled;
-	@OneToOne
-	private Publisher publisher;
+
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Role.class)
 	@JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = {
@@ -87,13 +85,6 @@ public class User implements Serializable{
 		this.roles = roles;
 	}
 
-	public Publisher getPublisher() {
-		return publisher;
-	}
 
-	public void setPublisher(Publisher publisher) {
-		this.publisher = publisher;
-	}
-	
 
 }
