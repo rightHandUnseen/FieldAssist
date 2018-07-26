@@ -2,15 +2,14 @@ package org.rightHand.FieldAssistant.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ApplicationController {
 
-	@ResponseBody
+
 	@RequestMapping("/home")
 	public String home() {
-		return "mhome.html";
+		return "/home.html";
 	}
 	
 	
@@ -21,7 +20,7 @@ public class ApplicationController {
 	
 	@RequestMapping("/login")
 	public String login() {
-		return "/login.html";
+		return "login";
 	}
 	
 	

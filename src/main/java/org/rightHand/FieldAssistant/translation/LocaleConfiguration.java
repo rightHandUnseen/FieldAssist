@@ -14,17 +14,24 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 public class LocaleConfiguration implements WebMvcConfigurer {
 
 	@Bean
-    LocaleResolver localeResolver() {
+    public LocaleResolver localeResolver() {
         CookieLocaleResolver resolver = new CookieLocaleResolver();
         resolver.setDefaultLocale(Locale.US);
         return resolver;
     }
 	
+	@Bean
+	public LocaleChangeInterceptor localeChangeInterceptor() {
+		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+        localeChangeInterceptor.setParamName("lang");
+        return localeChangeInterceptor;
+	}
+	
 	@Override
     public void addInterceptors(InterceptorRegistry registry) {
-        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("lang"); // Query string parameter name
-        registry.addInterceptor(localeChangeInterceptor);
+//        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+//        localeChangeInterceptor.setParamName("lang"); // Query string parameter name
+        registry.addInterceptor(localeChangeInterceptor());
         
     }
 	
