@@ -8,9 +8,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+
+import nz.net.ultraq.thymeleaf.LayoutDialect;
+import nz.net.ultraq.thymeleaf.decorators.strategies.GroupingStrategy;
 
 @Configuration
 @ComponentScan("org.rightHand.FieldAssistant.controller")
@@ -47,6 +51,8 @@ public class ThymeleafConfiguration implements WebMvcConfigurer {
 		engine.setTemplateResolver(templateResolver());
 		engine.setTemplateEngineMessageSource(databaseMessageSource);
 		engine.setEnableSpringELCompiler(true);
+		engine.addDialect(new LayoutDialect(new GroupingStrategy()));
+		engine.addDialect(new SpringSecurityDialect());
 		return engine;
 	}
 

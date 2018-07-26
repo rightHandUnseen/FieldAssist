@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{base.html}">
 <head>
-
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Home</title>
+<link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-	Hello world!
-	<div>
-		Logged in user: <b th:inline="text" class="user">
-			[[${#httpServletRequest.remoteUser}]] </b>
-		<form th:action="@{/logout}" method="POST">
-			<input type="submit" value="Logout" />
-		</form>
-	</div>
+	<section layout:fragment="custom-content">
+		Hello world!
+		<div>
+			Logged in user: <b th:inline="text" class="user">
+				[[${#httpServletRequest.remoteUser}]] </b>
+			<form th:action="@{/logout}" method="POST">
+				<input type="submit" value="Logout" />
+			</form>
+		</div>
+	</section>
 </body>
 </html>
