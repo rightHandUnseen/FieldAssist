@@ -1,12 +1,14 @@
 package org.rightHand.FieldAssistant.repositories;
 
-import org.rightHand.FieldAssistant.model.User;
+import org.rightHand.FieldAssistant.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>{
+public interface RoleRepository extends JpaRepository<Role, Long> {
 
-	public boolean existsByUsername(String username);
+	boolean existsByName(String name);
+	
+	Role findByName(String name);
 	
 }

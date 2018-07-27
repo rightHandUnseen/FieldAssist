@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Note {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	@DateTimeFormat

@@ -18,7 +18,7 @@ import javax.validation.constraints.NotBlank;
 public class Contact {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	@NotBlank
 	private String contactName;

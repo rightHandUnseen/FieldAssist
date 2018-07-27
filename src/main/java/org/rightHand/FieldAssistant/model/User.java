@@ -1,6 +1,7 @@
 package org.rightHand.FieldAssistant.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,7 +21,7 @@ public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1018399282930847120L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(unique = true)
 	private String username;
@@ -30,13 +31,27 @@ public class User implements Serializable{
 	private boolean enabled;
 
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Role.class)
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, targetEntity = Role.class)
 	@JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "ROLE_ID") }, uniqueConstraints = @UniqueConstraint(columnNames = { "USER_ID",
 					"ROLE_ID" }, name =  "UK_USER_ROLE"))
 
 	private Set<Role> roles;
 
+	public User (String username, String password, String email) {
+		this.roles = new HashSet<Role>();
+		this.username=username;
+		this.password=password;
+		this.email = email;
+		this.enabled = true;
+	}
+	public User() {
+		this.roles = new HashSet<Role>();
+		this.enabled = true;
+	}
+	
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -83,6 +98,10 @@ public class User implements Serializable{
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+	
+	public void addRole(Role role) {
+		this.roles.add(role);
 	}
 
 
