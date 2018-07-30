@@ -4,18 +4,66 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{base.html}">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<meta charset="ISO-8859-1">
 <title>Spring Boot MVC Security using Thymeleaf</title>
 <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
 	<section layout:fragment="custom-content">
-		<h3>Spring Boot MVC Security using Thymeleaf</h3>
-		<p th:if="${param.error}" class="error">Bad Credentials</p>
-		<form th:action="@{/login}" method="POST">
-			User Name : <input type="text" name="username" /> <br /> <br />
-			Password: <input type="password" name="password" /> <br /> <br />
-			<input type="submit" value="Login" />
+		<form class="form-signin" th:action="@{/login}" method="POST">
+			<div class="text-center mb-4">
+				<img class="mb-4"
+					src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg"
+					alt="" width="72" height="72">
+				<h1 class="h3 mb-3 font-weight-normal">Floating labels</h1>
+				<p>
+					Build form controls with floating labels via the
+					<code>:placeholder-shown</code>
+					pseudo-element. <a
+						href="https://caniuse.com/#feat=css-placeholder-shown">Works
+						in latest Chrome, Safari, and Firefox.</a>
+				</p>
+				<p th:if="${param.error}" class="error">Bad Credentials</p>
+			</div>
+
+			<div class="form-label-group">
+				<input type="text" id="inputEmail" class="form-control"
+					placeholder="Username" required="" autofocus="" name="username"> <label
+					for="inputEmail">Username</label>
+			</div>
+
+			<div class="form-label-group">
+				<input type="password" id="inputPassword" class="form-control"
+					placeholder="Password" required="" name="password"> <label
+					for="inputPassword">Password</label>
+			</div>
+
+			<div class="checkbox mb-3">
+				<label> <input type="checkbox" value="remember-me">
+					Remember me
+				</label>
+			</div>
+			<input class="btn btn-lg btn-primary btn-block" type="submit">Sign
+				in</input>
+			<p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
 		</form>
+
 	</section>
 	<footer>
 		<p layout:fragment="custom-footer">This is some footer content
