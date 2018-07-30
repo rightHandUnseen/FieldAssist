@@ -32,6 +32,7 @@ public class DefaultSettingsLoader implements ApplicationRunner {
 		roleService.save(new Role("ROLE_ELDER"));
 		roleService.save(new Role("ROLE_SERVICE_OVERSEER"));
 		roleService.save(new Role("ROLE_BODY_COORDINATOR"));
+		roleService.save(new Role("ROLE_SECRETARY"));
 		roleService.save(new Role("ROLE_GROUP_COORDINATOR"));
 		roleService.save(new Role("ROLE_CIRCUIT_OVERSEER"));
 		roleService.save(new Role("ROLE_CONGREGATION_ADMIN"));
