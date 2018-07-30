@@ -13,6 +13,16 @@ public class Language {
 	@Column(unique = true)
 	private String jwcode;
 
+		
+	public Language() {
+	}
+
+	public Language(String isoname, String isocode, String jwcode) {
+		this.isoname = isoname;
+		this.isocode = isocode;
+		this.jwcode = jwcode;
+	}
+
 	public String getIsoname() {
 		return isoname;
 	}

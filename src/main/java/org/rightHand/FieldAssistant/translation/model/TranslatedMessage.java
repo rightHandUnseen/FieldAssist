@@ -2,36 +2,38 @@ package org.rightHand.FieldAssistant.translation.model;
 
 import java.io.Serializable;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
-public class TranslatedMessage implements Serializable{
-	
+public class TranslatedMessage implements Serializable {
+
 	private static final long serialVersionUID = 4855102024833517948L;
-	@Id
-	@ManyToOne
-	private DefaultMessage defaultMessage;
-	@Id
-	@ManyToOne
-	private SupportedLocale locale;
+
+	@EmbeddedId
+	private MessageIdentity messageIdentity;
 	private String messageValue;
 
-	public DefaultMessage getDefaultMessage() {
-		return defaultMessage;
+	public TranslatedMessage() {
+
 	}
 
-	public void setDefaultMessage(DefaultMessage defaultMessage) {
-		this.defaultMessage = defaultMessage;
+	public TranslatedMessage(MessageIdentity messageIdentity, String messageValue) {
+
+		this.messageIdentity = messageIdentity;
+		this.messageValue = messageValue;
+	}
+	
+	public TranslatedMessage(MessageIdentity messageIdentity) {
+		this.messageIdentity = messageIdentity;
 	}
 
-	public SupportedLocale getLocale() {
-		return locale;
+	public MessageIdentity getMessageIdentity() {
+		return messageIdentity;
 	}
 
-	public void setLocale(SupportedLocale locale) {
-		this.locale = locale;
+	public void setMessageIdentity(MessageIdentity messageIdentity) {
+		this.messageIdentity = messageIdentity;
 	}
 
 	public String getMessageValue() {

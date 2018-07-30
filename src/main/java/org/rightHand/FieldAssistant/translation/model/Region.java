@@ -7,8 +7,18 @@ import javax.persistence.Id;
 public class Region {
 	@Id
 	private String regionCode;
-	
+
 	private String regionName;
+
+	public Region() {
+
+	}
+
+	public Region(String regionCode, String regionName) {
+
+		this.regionCode = regionCode;
+		this.regionName = regionName;
+	}
 
 	public String getRegionCode() {
 		return regionCode;
@@ -25,6 +35,5 @@ public class Region {
 	public void setRegionName(String regionName) {
 		this.regionName = regionName;
 	}
-	
-	
+
 }

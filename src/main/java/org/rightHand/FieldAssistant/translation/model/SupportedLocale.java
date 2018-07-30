@@ -12,7 +12,7 @@ import org.rightHand.FieldAssistant.model.Language;
 public class SupportedLocale {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private String name;
@@ -21,6 +21,17 @@ public class SupportedLocale {
 	@ManyToOne
 	private Region region;
 
+	
+	
+	public SupportedLocale(String name, Language language, Region region) {
+		super();
+		this.name = name;
+		this.language = language;
+		this.region = region;
+	}
+
+	public SupportedLocale() {}
+	
 	public Language getLanguage() {
 		return language;
 	}

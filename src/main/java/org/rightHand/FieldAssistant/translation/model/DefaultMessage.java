@@ -1,5 +1,6 @@
 package org.rightHand.FieldAssistant.translation.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,12 +10,20 @@ import javax.persistence.Id;
 public class DefaultMessage {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
+	@Column(unique=true)
 	private String messageCode;
 
 	private String messageValue;
+
+	
+	
+	public DefaultMessage(String messageCode, String messageValue) {
+		super();
+		this.messageCode = messageCode;
+		this.messageValue = messageValue;
+	}
 
 	public int getId() {
 		return id;
