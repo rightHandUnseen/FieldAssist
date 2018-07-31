@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -23,6 +24,10 @@ public class Congregation {
 			@JoinColumn(name = "CONGREGATION_ID") }, uniqueConstraints = @UniqueConstraint(columnNames = { "CONGREGATION_ID",
 					"LANGUAGE_ISOCODE" }, name =  "UK_CONGREGATION_LANGUAGE"))
 	private List<Language> languages;
+	@OneToMany
+	private List<Group> groups;
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -41,7 +46,21 @@ public class Congregation {
 	public void setCity(City city) {
 		this.city = city;
 	}
-	
+	public List<Language> getLanguages() {
+		return languages;
+	}
+	public void setLanguages(List<Language> languages) {
+		this.languages = languages;
+	}
+	public List<Group> getGroups() {
+		return groups;
+	}
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}
+	public void addGroup(Group group) {
+		this.groups.add(group);
+	}
 	
 	
 }

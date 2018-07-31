@@ -17,7 +17,7 @@ public class RoleService {
 	
 	public Role save (Role role) {
 		Role innerRole = findByName(role.getName());
-		if(innerRole.getId()==null) {
+		if(innerRole == null || innerRole.getId()==null) {
 			return roleRepository.saveAndFlush(role);
 		}
 		else return innerRole;

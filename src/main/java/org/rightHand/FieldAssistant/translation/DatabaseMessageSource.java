@@ -1,8 +1,8 @@
 package org.rightHand.FieldAssistant.translation;
 
-import java.text.MessageFormat;
 import java.util.Locale;
 
+import org.rightHand.FieldAssistant.translation.model.DefaultMessage;
 import org.rightHand.FieldAssistant.translation.model.MessageIdentity;
 import org.rightHand.FieldAssistant.translation.model.SupportedLocale;
 import org.rightHand.FieldAssistant.translation.repository.SupportedLocaleRepository;
@@ -51,16 +51,26 @@ public class DatabaseMessageSource implements MessageSource {
 	private String resolveMessage(String code, Object[] args, Locale locale) {
 		SupportedLocale supportedLocale = supportedLocaleRepository.findByLocale(locale);
 		String message = "";
-		if(supportedLocale == null) {
-			MessageIdentity messageIdentity = new MessageIdentity(defaultMessageService.findByMessageCode(code), supportedLocale);
+		if (supportedLocale == null) {
+			MessageIdentity messageIdentity = new MessageIdentity(defaultMessageService.findByMessageCode(code),
+					supportedLocale);
 			message = translatedMessageService.findOne(messageIdentity).getMessageValue();
+
 		} else {
-			message = defaultMessageService.findByMessageCode(code).getMessageValue();
+			DefaultMessage dmessage = defaultMessageService.findByMessageCode(code);
+			if(dmessage == null || dmessage.getMessageValue()==null) {
+				// Returns the code, that is filled by default, if all else is empty;
+				message = code;
+			} else {
+				// Returns the default message, if exists, but there's no translation;
+				message = dmessage.getMessageValue();
+			}
 		}
-		MessageFormat messageFormat = new MessageFormat(message, locale);
-	    StringBuffer formattedMessage = new StringBuffer();
-	    messageFormat.format(args, formattedMessage, null);
-	    return formattedMessage.toString();
+//		MessageFormat messageFormat = new MessageFormat(message, locale);
+//	    StringBuffer formattedMessage = new StringBuffer();
+//	    messageFormat.format(args, formattedMessage, null);
+//	    return formattedMessage.toString();
+		return message;
 	}
 
 }
