@@ -3,9 +3,12 @@ package org.rightHand.FieldAssistant.translation;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.rightHand.FieldAssistant.model.Language;
 import org.rightHand.FieldAssistant.services.LanguageService;
 import org.rightHand.FieldAssistant.translation.model.DefaultMessage;
+import org.rightHand.FieldAssistant.translation.model.LocaleIdentity;
 import org.rightHand.FieldAssistant.translation.model.MessageIdentity;
 import org.rightHand.FieldAssistant.translation.model.Region;
 import org.rightHand.FieldAssistant.translation.model.SupportedLocale;
@@ -22,6 +25,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SystemMessagesLoader implements ApplicationRunner{
 
+	
 	@Autowired
 	private DefaultMessageService messages;
 	@Autowired
@@ -41,12 +45,14 @@ public class SystemMessagesLoader implements ApplicationRunner{
 
 	
 	public void loadMessages() {
-		
+
+	    
 		Language english = new Language("English", "en", "E");
 		english = languages.save(english);
 		Region us = new Region("us", "United States"); 
 		us = regions.save(us);
-		SupportedLocale locale = new SupportedLocale("en_us", english, us);
+		LocaleIdentity localeId = new LocaleIdentity(english, us);
+		SupportedLocale locale = new SupportedLocale(localeId, "en_us");
 		locale = locales.save(locale);
 		List<DefaultMessage> defaultMessages = new ArrayList<DefaultMessage>();
 		defaultMessages.add(messages.save(new DefaultMessage("mainTitle","Field Assistant")));
@@ -54,7 +60,7 @@ public class SystemMessagesLoader implements ApplicationRunner{
 		MessageIdentity messageId;
 		TranslatedMessage translation;
 		for(DefaultMessage message: defaultMessages) {
-			messageId = new MessageIdentity(message, locale);
+			messageId = new MessageIdentity(message, locale);	
 			translation = new TranslatedMessage(messageId, message.getMessageValue());
 			translatedMessage.save(translation);
 			

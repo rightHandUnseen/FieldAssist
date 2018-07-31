@@ -3,10 +3,11 @@ package org.rightHand.FieldAssistant.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Language {
-
+	@NotNull
 	private String isoname;
 	@Id
 	private String isocode;

@@ -3,7 +3,11 @@ package org.rightHand.FieldAssistant.translation;
 import java.text.MessageFormat;
 import java.util.Locale;
 
+import org.rightHand.FieldAssistant.translation.model.MessageIdentity;
+import org.rightHand.FieldAssistant.translation.model.SupportedLocale;
+import org.rightHand.FieldAssistant.translation.repository.SupportedLocaleRepository;
 import org.rightHand.FieldAssistant.translation.service.DefaultMessageService;
+import org.rightHand.FieldAssistant.translation.service.TranslatedMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
@@ -18,6 +22,10 @@ public class DatabaseMessageSource implements MessageSource {
 	JdbcTemplate jdbcTemplate;
 	@Autowired
 	private DefaultMessageService defaultMessageService;
+	@Autowired
+	private TranslatedMessageService translatedMessageService;
+	@Autowired
+	private SupportedLocaleRepository supportedLocaleRepository;
 
 	@Override
 	public String getMessage(String code, Object[] args, String defaultMessage, Locale locale) {
@@ -41,7 +49,14 @@ public class DatabaseMessageSource implements MessageSource {
 	}
 
 	private String resolveMessage(String code, Object[] args, Locale locale) {
-		String message = ""; // TODO Load message from database...
+		SupportedLocale supportedLocale = supportedLocaleRepository.findByLocale(locale);
+		String message = "";
+		if(supportedLocale == null) {
+			MessageIdentity messageIdentity = new MessageIdentity(defaultMessageService.findByMessageCode(code), supportedLocale);
+			message = translatedMessageService.findOne(messageIdentity).getMessageValue();
+		} else {
+			message = defaultMessageService.findByMessageCode(code).getMessageValue();
+		}
 		MessageFormat messageFormat = new MessageFormat(message, locale);
 	    StringBuffer formattedMessage = new StringBuffer();
 	    messageFormat.format(args, formattedMessage, null);

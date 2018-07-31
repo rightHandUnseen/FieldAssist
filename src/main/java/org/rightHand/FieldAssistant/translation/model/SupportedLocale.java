@@ -1,59 +1,33 @@
 package org.rightHand.FieldAssistant.translation.model;
 
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import org.rightHand.FieldAssistant.model.Language;
 
 @Entity
 public class SupportedLocale {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@EmbeddedId
+	private LocaleIdentity localeIdentity;
 
+	@Column(unique = true)
 	private String name;
-	@ManyToOne
-	private Language language;
-	@ManyToOne
-	private Region region;
 
-	
-	
-	public SupportedLocale(String name, Language language, Region region) {
-		super();
+	public SupportedLocale() {
+	}
+
+	public SupportedLocale(LocaleIdentity localeIdentity, String name) {
+
+		this.localeIdentity = localeIdentity;
 		this.name = name;
-		this.language = language;
-		this.region = region;
 	}
 
-	public SupportedLocale() {}
-	
-	public Language getLanguage() {
-		return language;
+	public LocaleIdentity getLocaleIdentity() {
+		return localeIdentity;
 	}
 
-	public void setLanguage(Language language) {
-		this.language = language;
-	}
-
-	public Region getRegion() {
-		return region;
-	}
-
-	public void setRegion(Region region) {
-		this.region = region;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+	public void setLocaleIdentity(LocaleIdentity localeIdentity) {
+		this.localeIdentity = localeIdentity;
 	}
 
 	public String getName() {

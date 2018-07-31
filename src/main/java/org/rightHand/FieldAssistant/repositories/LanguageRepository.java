@@ -9,4 +9,5 @@ public interface LanguageRepository extends JpaRepository<Language, String>{
 
 	boolean existsByIsocode(String isocode);
 	
+	
 }

@@ -17,10 +17,9 @@ public class DefaultMessage {
 
 	private String messageValue;
 
-	
+	public DefaultMessage() {}
 	
 	public DefaultMessage(String messageCode, String messageValue) {
-		super();
 		this.messageCode = messageCode;
 		this.messageValue = messageValue;
 	}

@@ -1,7 +1,9 @@
 package org.rightHand.FieldAssistant.translation.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.rightHand.FieldAssistant.translation.model.LocaleIdentity;
 import org.rightHand.FieldAssistant.translation.model.SupportedLocale;
 import org.rightHand.FieldAssistant.translation.repository.SupportedLocaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +16,27 @@ public class SupportedLocaleService {
 	private SupportedLocaleRepository supportedLocaleRepository;
 	
 	public SupportedLocale save (SupportedLocale supportedLocale) {
-		if(!supportedLocaleRepository.existsById( supportedLocale.getId())) {
+		Optional<SupportedLocale> innerLocale = supportedLocaleRepository.findById(supportedLocale.getLocaleIdentity());
+		if(!innerLocale.isPresent()) {
 			return supportedLocaleRepository.saveAndFlush(supportedLocale);
 		}
-		else return null;
+		else return innerLocale.get();
 	}
 	
 	public List<SupportedLocale> listAll(){
 		return supportedLocaleRepository.findAll();
 	}
 	
-	public SupportedLocale findOne(Long id) {
-		return supportedLocaleRepository.getOne( id);
+	public SupportedLocale findOne(LocaleIdentity id) {
+		return supportedLocaleRepository.findByLocaleIdentity(id);
 	}
 	
-	public void delete(Long id) {
+	public void delete(LocaleIdentity id) {
 		supportedLocaleRepository.deleteById(id);
+	}
+	
+	public SupportedLocale findByName(String name) {
+		return supportedLocaleRepository.findByName(name);
 	}
 	
 }

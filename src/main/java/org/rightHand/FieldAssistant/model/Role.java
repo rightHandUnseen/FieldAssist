@@ -15,7 +15,7 @@ public class Role {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	@Column(unique = true)
 	private String name;
 	@ManyToMany(mappedBy="roles", targetEntity = User.class, cascade = CascadeType.MERGE)
@@ -27,11 +27,11 @@ public class Role {
 		this.name = name;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -1,6 +1,7 @@
 package org.rightHand.FieldAssistant.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.rightHand.FieldAssistant.model.Role;
 import org.rightHand.FieldAssistant.repositories.RoleRepository;
@@ -15,10 +16,11 @@ public class RoleService {
 	
 	
 	public Role save (Role role) {
-		if(!roleRepository.existsByName(role.getName())) {
+		Role innerRole = findByName(role.getName());
+		if(innerRole.getId()==null) {
 			return roleRepository.saveAndFlush(role);
 		}
-		else return null;
+		else return innerRole;
 	}
 	
 	public List<Role> listAll(){

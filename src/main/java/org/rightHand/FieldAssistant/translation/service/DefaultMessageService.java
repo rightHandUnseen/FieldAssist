@@ -14,10 +14,11 @@ public class DefaultMessageService {
 	private DefaultMessageRepository defaultMessageRepository;
 	
 	public DefaultMessage save (DefaultMessage defaultMessage) {
-		if(!defaultMessageRepository.existsByMessageCode(defaultMessage.getMessageCode())) {
+		DefaultMessage innerDefaultMessage = findByMessageCode(defaultMessage.getMessageCode());
+		if(innerDefaultMessage == null) {
 			return defaultMessageRepository.saveAndFlush(defaultMessage);
 		}
-		else return null;
+		else return innerDefaultMessage;
 	}
 	
 	public List<DefaultMessage> listAll(){

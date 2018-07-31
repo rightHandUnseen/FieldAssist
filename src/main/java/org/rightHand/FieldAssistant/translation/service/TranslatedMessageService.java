@@ -1,6 +1,7 @@
 package org.rightHand.FieldAssistant.translation.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.rightHand.FieldAssistant.translation.model.MessageIdentity;
 import org.rightHand.FieldAssistant.translation.model.TranslatedMessage;
@@ -15,10 +16,11 @@ public class TranslatedMessageService {
 	private TranslatedMessageRepository translatedMessageRepository;
 	
 	public TranslatedMessage save (TranslatedMessage translatedMessage) {
-		if(!translatedMessageRepository.existsById(translatedMessage.getMessageIdentity())) {
+		Optional<TranslatedMessage> innerMessage = translatedMessageRepository.findById(translatedMessage.getMessageIdentity()); 
+		if(!innerMessage.isPresent()) {
 			return translatedMessageRepository.saveAndFlush(translatedMessage);
 		}
-		else return null;
+		else return innerMessage.get();
 	}
 	
 	public List<TranslatedMessage> listAll(){

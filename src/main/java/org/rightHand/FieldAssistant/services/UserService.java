@@ -16,12 +16,13 @@ public class UserService {
 	
 	
 	public User save (User user) {
-		if(!userRepository.existsByUsername(user.getUsername())) {
+		User innerUser = findByUsername(user.getUsername());
+		if(innerUser==null) {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			user.setPassword(encoder.encode(user.getPassword()));
 			return userRepository.saveAndFlush(user);
 		}
-		else return null;
+		else return innerUser;
 	}
 	
 	public List<User> listAll(){
@@ -34,6 +35,10 @@ public class UserService {
 	
 	public void delete(Long id) {
 		userRepository.deleteById(id);
+	}
+	
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
 	}
 	
 }

@@ -1,6 +1,7 @@
 package org.rightHand.FieldAssistant.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.rightHand.FieldAssistant.model.Language;
 import org.rightHand.FieldAssistant.repositories.LanguageRepository;
@@ -14,10 +15,11 @@ public class LanguageService {
 	private LanguageRepository languageRepository;
 
 	public Language save(Language language) {
-		if (!languageRepository.existsByIsocode(language.getIsocode())) {
+		Optional<Language> innerLanguage = languageRepository.findById(language.getIsocode());
+		if (!innerLanguage.isPresent()) {
 			return languageRepository.saveAndFlush(language);
 		} else
-			return null;
+			return innerLanguage.get();
 	}
 
 	public List<Language> listAll() {
@@ -31,5 +33,7 @@ public class LanguageService {
 	public void delete(String isocode) {
 		languageRepository.deleteById(isocode);
 	}
+	
+	
 
 }
