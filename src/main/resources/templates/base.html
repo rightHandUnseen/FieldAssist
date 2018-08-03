@@ -4,22 +4,29 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 	crossorigin="anonymous"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+	integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 <meta charset="ISO-8859-1">
+<script>
+    $(document).ready(function () {
+        $('.dropdown-toggle').dropdown();
+    });
+</script>
 <title>th:text="#{mainTitle.message}"</title>
 </head>
 <body>
@@ -34,43 +41,151 @@
 				aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-
 			<div class="collapse navbar-collapse" id="navbarsExample09">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">Home
-							<span class="sr-only">(current)</span>
+					<!-- Any -->
+					<li class="nav-item active"><a class="nav-link" href="/home"
+						th:text="#{navbar.home}">Home <span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-					<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
-					</li>
-					<li sec:authorize="hasRole('ROLE_SUPER_ADMIN')"
+					<!-- User -->
+					<li sec:authorize="${hasRole('ROLE_USER')}" class="nav-item active"><a
+						class="nav-link" href="/core/index" th:text="#{navbar.index}"><span
+							class="sr-only">(current)</span> </a></li>
+					<!-- Publisher -->
+					<li sec:authorize="hasRole('ROLE_PUBLISHER')"
 						class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 						href="http://example.com" id="dropdown09" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">Dropdown</a>
+						aria-haspopup="true" aria-expanded="false"
+						th:text="#{navbar.publishers}"></a>
 						<div class="dropdown-menu" aria-labelledby="dropdown09">
 							<a class="dropdown-item" href="#">Action</a> <a
 								class="dropdown-item" href="#">Another action</a> <a
 								class="dropdown-item" href="#">Something else here</a>
 						</div></li>
+					<!-- Pioneer	 -->
+					<li sec:authorize="hasRole('ROLE_PIONEER')"
+						class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+						href="http://example.com" id="dropdown09" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"
+						th:text="#{navbar.pioneer}"></a>
+						<div class="dropdown-menu" aria-labelledby="dropdown09">
+							<a class="dropdown-item" href="#">Action</a> <a
+								class="dropdown-item" href="#">Another action</a> <a
+								class="dropdown-item" href="#">Something else here</a>
+						</div></li>
+					<!-- Ministerial Servant	 -->
+					<li sec:authorize="hasRole('ROLE_MINISTERIAL_SERVANT')"
+						class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+						href="http://example.com" id="dropdown09" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"
+						th:text="#{navbar.servants}"></a>
+						<div class="dropdown-menu" aria-labelledby="dropdown09">
+							<a class="dropdown-item" href="#">Action</a> <a
+								class="dropdown-item" href="#">Another action</a> <a
+								class="dropdown-item" href="#">Something else here</a>
+						</div></li>
+					<!-- Elders -->
+					<li sec:authorize="hasRole('ROLE_ELDER')" class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="http://example.com"
+						id="dropdown09" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false" th:text="#{navbar.elders}"></a>
+						<div class="dropdown-menu" aria-labelledby="dropdown09">
+							<a class="dropdown-item" href="#">Action</a> <a
+								class="dropdown-item" href="#">Another action</a> <a
+								class="dropdown-item" href="#">Something else here</a>
+						</div></li>
+					<!-- Congregation -->
+					<li sec:authorize="hasRole('ROLE_CONGREGATION_ADMIN')"
+						class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+						href="http://example.com" id="dropdown09" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"
+						th:text="#{navbar.congregation}"></a>
+						<div class="dropdown-menu" aria-labelledby="dropdown09">
+							<a class="dropdown-item" href="#">Action</a> <a
+								class="dropdown-item" href="#">Another action</a> <a
+								class="dropdown-item" href="#">Something else here</a>
+						</div></li>
+
+
+					<!-- Circuit -->
+					<li sec:authorize="hasRole('ROLE_CIRCUIT_OVERSEER')"
+						class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+						href="http://example.com" id="dropdown09" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"
+						th:text="#{navbar.circuit}"></a>
+						<div class="dropdown-menu" aria-labelledby="dropdown09">
+							<a class="dropdown-item" href="#">Action</a> <a
+								class="dropdown-item" href="#">Another action</a> <a
+								class="dropdown-item" href="#">Something else here</a>
+						</div></li>
+
+					<!-- Super Admin -->
+					<li sec:authorize="hasRole('ROLE_SUPER_ADMIN')"
+						class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+						href="http://example.com" id="dropdown09" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"
+						th:text="#{navbar.superadmin}"></a>
+						<div class="dropdown-menu" aria-labelledby="dropdown09">
+							<a class="dropdown-item" href="#">Action</a> <a
+								class="dropdown-item" href="#">Another action</a> <a
+								class="dropdown-item" href="#">Something else here</a>
+						</div></li>
+
 				</ul>
-				<div sec:authorize="${hasRole('USER')}"><form th:action="@{/logout}" method="POST">
-				<input type="submit" th:text="#{logoutButton}" />
-			</form></div>
-				<form class="form-inline my-2 my-md-0">
-					<input class="form-control" type="text" placeholder="Search"
-						aria-label="Search">
+
+				<form class="form-inline my-2 my-md-0"
+					sec:authorize="${hasRole('ROLE_USER')}" th:action="@{/logout}"
+					method="POST">
+					<input type="submit" class="btn btn-warning"
+						th:value="#{logoutButton}" />
 				</form>
+				<form class="form-inline my-2 my-md-0 "
+					th:action="@{/changeLanguage}" method="POST">
+					<!-- 					<select name="selectedLocale" id="selectedLocale"> -->
+					<!-- 						<option th:each="locale : ${@supportedLocaleService.listAll()}" -->
+					<!-- 							th:value="${locale.localeIdentity}" th:utext="${locale.name}"></option> -->
+					<!-- 					</select> -->
+					<div class="btn-group">
+						<button class="btn btn-light dropdown-toggle" type="button"
+							id="dropdownMenuButton" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							<i class="material-icons">translate</i>
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+							th:each="locale : ${@supportedLocaleService.listAll()}">
+							<button type="button" class="dropdown-item"
+								th:text="${locale.name}"></button>
+						</div>
+					</div>
+				</form>
+
+
+				<form class="form-inline my-2 my-md-0"
+					sec:authorize="${isAnonymous()}" method="POST">
+					<input type="button" class="btn btn-success"
+						th:value="#{loginButton}" onclick="location.href='/login'"/>
+				</form>
+				<form class="form-inline my-2 my-md-0"
+					sec:authorize="${isAnonymous()}" method="POST">
+					<input type="button" class="btn btn-submit"
+						th:value="#{registerButton}" onclick="location.href='/register'"/>
+				</form>
+
+				<!-- 				<form class="form-inline my-2 my-md-0"> -->
+				<!-- 					<input class="form-control" type="text" placeholder="Search" -->
+				<!-- 						aria-label="Search"> -->
+				<!-- 				</form> -->
 			</div>
 		</nav>
 	</section>
 
-	<section layout:fragment="custom-content">
+	<section layout:fragment="custom-content" class="text-center">
 		<p>Your page content goes here</p>
 	</section>
 	<footer>
 		<p>My custom footer</p>
 		<p layout:fragment="custom-footer">Your custom footer here</p>
-		
+
 	</footer>
 </body>
 </html>

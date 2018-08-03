@@ -4,7 +4,8 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{base.html}">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous"></script>
@@ -20,49 +21,62 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+	rel="stylesheet">
 <meta charset="ISO-8859-1">
 <title>Spring Boot MVC Security using Thymeleaf</title>
 <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
 	<section layout:fragment="custom-content">
-		<form class="form-signin" th:action="@{/login}" method="POST">
-			<div class="text-center mb-4">
-				<img class="mb-4"
-					src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg"
-					alt="" width="72" height="72">
-				<h1 class="h3 mb-3 font-weight-normal">Floating labels</h1>
-				<p>
-					Build form controls with floating labels via the
-					<code>:placeholder-shown</code>
-					pseudo-element. <a
-						href="https://caniuse.com/#feat=css-placeholder-shown">Works
-						in latest Chrome, Safari, and Firefox.</a>
-				</p>
-				<p th:if="${param.error}" class="error">Bad Credentials</p>
+		<div id="container" class="container">
+
+			<div class="col-sm-4 offset-sm-4 text-center">
+
+				<form th:action="@{/login}" method="POST">
+					<fieldset>
+						<legend th:text="#{login.formtitle}"></legend>
+						<div class="form-group">
+							<label for="username" th:text="#{login.username.label}"></label>
+							<div class="input-group">
+								<input id="username" name="username"
+									th:placeholder="#{login.username.placeholder}" type="text"
+									class="form-control here">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password" th:text="#{login.password.label}"></label>
+							<div class="input-group">
+
+								<input id="password" name="password"
+									th:placeholder="#{login.password.placeholder}" type="password"
+									class="form-control here">
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<input name="rememberme" type="checkbox"
+									class="custom-control-input" value="0" /> <label
+									class="custom-control custom-checkbox"
+									th:text="#{login.rememberme.label}" for="rememberme"> </label>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<input name="login" type="submit" class="btn btn-success"
+								th:value="#{login.loginbutton}" />
+								<br/>
+								 <input name="register"
+								type="submit" class="btn btn-primary"
+								th:value="#{login.registerbutton}" />
+						</div>
+					</fieldset>
+				</form>
+
 			</div>
 
-			<div class="form-label-group">
-				<input type="text" id="inputEmail" class="form-control"
-					placeholder="Username" required="" autofocus="" name="username"> <label
-					for="inputEmail">Username</label>
-			</div>
-
-			<div class="form-label-group">
-				<input type="password" id="inputPassword" class="form-control"
-					placeholder="Password" required="" name="password"> <label
-					for="inputPassword">Password</label>
-			</div>
-
-			<div class="checkbox mb-3">
-				<label> <input type="checkbox" value="remember-me">
-					Remember me
-				</label>
-			</div>
-			<input class="btn btn-lg btn-primary btn-block" type="submit">Sign
-				in</input>
-			<p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
-		</form>
+		</div>
 
 	</section>
 	<footer>

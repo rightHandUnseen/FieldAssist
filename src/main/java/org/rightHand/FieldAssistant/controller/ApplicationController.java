@@ -1,6 +1,8 @@
 package org.rightHand.FieldAssistant.controller;
 
+import org.rightHand.FieldAssistant.dto.UserDTO;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -23,5 +25,10 @@ public class ApplicationController {
 		return "login";
 	}
 	
+	@RequestMapping(value= {"/registration", "/register"})
+	public String register(Model model) {
+		model.addAttribute("userDto", new UserDTO());
+		return "register";
+	}
 	
 }

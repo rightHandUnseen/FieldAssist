@@ -57,6 +57,20 @@ public class SystemMessagesLoader implements ApplicationRunner{
 		List<DefaultMessage> defaultMessages = new ArrayList<DefaultMessage>();
 		defaultMessages.add(messages.save(new DefaultMessage("mainTitle","Field Assistant")));
 		
+		
+		// Login Form
+		defaultMessages.add(messages.save(new DefaultMessage("login.formtitle","Login to the System")));
+		defaultMessages.add(messages.save(new DefaultMessage("login.username.label","Username")));
+		defaultMessages.add(messages.save(new DefaultMessage("login.username.placeholder","username")));
+		defaultMessages.add(messages.save(new DefaultMessage("login.password.label","Password")));
+		defaultMessages.add(messages.save(new DefaultMessage("login.password.placeholder","password")));
+		defaultMessages.add(messages.save(new DefaultMessage("login.rememberme.label","Remember me?")));
+		defaultMessages.add(messages.save(new DefaultMessage("login.loginbutton","Login")));
+		defaultMessages.add(messages.save(new DefaultMessage("login.registerbutton","Register")));
+		
+		// Logout
+		defaultMessages.add(messages.save(new DefaultMessage("logoutButton","Logout")));
+		
 		MessageIdentity messageId;
 		TranslatedMessage translation;
 		for(DefaultMessage message: defaultMessages) {

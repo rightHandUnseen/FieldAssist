@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{base.html}">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="#{registerTitle}"></title>
+</head>
+<body>
+	<section layout:fragment="custom-content">
+		<div id="container" class="container">
+
+			<div class="col-sm-4 offset-sm-4 text-center">
+
+				<form th:action="@{/processRegistration}" th:object="${userDto}" method="POST">
+					<fieldset>
+						<legend th:text="#{register.formtitle}"></legend>
+						<div class="form-group">
+							<label for="username" th:text="#{register.username.label}"></label>
+							<div class="input-group">
+								<input id="username" name="username"
+									th:placeholder="#{register.username.placeholder}" type="text"
+									class="form-control here" th:field="*{username}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="email" th:text="#{register.email.label}"></label>
+							<div class="input-group">
+
+								<input id="email" name="email"
+									th:placeholder="#{register.email.placeholder}" type="text"
+									class="form-control here" th:field="*{email}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password" th:text="#{register.password.label}"></label>
+							<div class="input-group">
+
+								<input id="password" name="password"
+									th:placeholder="#{register.password.placeholder}" type="password"
+									class="form-control here" th:field="*{password}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="repassword" th:text="#{register.repassword.label}"></label>
+							<div class="input-group">
+
+								<input id="repassword" name="repassword"
+									th:placeholder="#{register.repassword.placeholder}" type="password"
+									class="form-control here" th:field="*{repassword}">
+							</div>
+						</div>
+						
+						
+						<div class="form-group">
+							<input name="register" type="submit" class="btn btn-success"
+								th:value="#{register.registerbutton}" /> 
+						</div>
+					</fieldset>
+				</form>
+
+			</div>
+
+		</div>
+
+	</section>
+</body>
+</html>

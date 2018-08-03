@@ -1,4 +1,4 @@
-package org.rightHand.FieldAssistant.systemsettings.model;
+package org.rightHand.FieldAssistant.systemsettings;
 
 import org.rightHand.FieldAssistant.model.Role;
 import org.rightHand.FieldAssistant.model.User;
